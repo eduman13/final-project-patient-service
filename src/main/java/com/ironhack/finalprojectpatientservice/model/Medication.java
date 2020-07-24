@@ -10,7 +10,7 @@ public class Medication {
 
     private String information;
 
-    @OneToOne(fetch=FetchType.LAZY)
+    @OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval=true)
     @MapsId
     private Patient patient;
 

@@ -1,8 +1,10 @@
 package com.ironhack.finalprojectpatientservice.model.dto;
 
+import com.ironhack.finalprojectpatientservice.model.Address;
 import com.ironhack.finalprojectpatientservice.model.Patient;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class PatientDTO {
 
@@ -15,6 +17,7 @@ public class PatientDTO {
     private Integer number;
     private Integer portal;
     private String street;
+    private Long doctorId;
 
     public PatientDTO() {
     }
@@ -91,6 +94,15 @@ public class PatientDTO {
         this.street = street;
     }
 
+
+    public Long getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
+    }
+
     public static PatientDTO patientToPatientDTO(Patient patient) {
         PatientDTO patientDTO = new PatientDTO();
             patientDTO.setId(patient.getId());
@@ -103,5 +115,25 @@ public class PatientDTO {
             patientDTO.setPortal(patient.getAddress().getPortal());
             patientDTO.setStreet(patient.getAddress().getStreet());
         return patientDTO;
+    }
+
+    public static Patient patientDTOToPatient(PatientDTO patientDTO) {
+        Patient patient = new Patient();
+            patient.setName(patientDTO.getName());
+            patient.setSurnames(patientDTO.getSurnames());
+            patient.setBirthday(patientDTO.getBirthday());
+            patient.setSocialSecurityNumber(patientDTO.getSocialSecurityNumber());
+        Address address = new Address();
+            address.setStreet(patientDTO.getStreet());
+            address.setPortal(patientDTO.getPortal());
+            address.setNumber(patientDTO.getNumber());
+            patient.setAddress(address);
+        if (Optional.ofNullable(patientDTO.getDoctorId()).isPresent()) {
+           patient.setDoctorId(patientDTO.getDoctorId());
+        }
+        if (Optional.ofNullable(patientDTO.getPhoto()).isPresent()) {
+            patient.setPhoto(patientDTO.getPhoto());
+        }
+        return patient;
     }
 }

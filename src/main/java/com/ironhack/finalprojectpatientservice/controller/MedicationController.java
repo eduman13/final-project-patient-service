@@ -1,5 +1,6 @@
 package com.ironhack.finalprojectpatientservice.controller;
 
+import com.ironhack.finalprojectpatientservice.exception.NotFoundPatientException;
 import com.ironhack.finalprojectpatientservice.model.dto.MedicationDTO;
 import com.ironhack.finalprojectpatientservice.service.MedicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class MedicationController {
 
     @GetMapping("/medication/find_by_patient/{id}")
     @ResponseStatus(HttpStatus.OK)
-        public MedicationDTO findByPatient(@PathVariable("id") Long patientId) throws Exception {
+        public MedicationDTO findByPatient(@PathVariable("id") Long patientId) throws NotFoundPatientException {
         return medicationService.findByPatient(patientId);
     }
 }

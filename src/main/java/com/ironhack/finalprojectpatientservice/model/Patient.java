@@ -21,8 +21,14 @@ public class Patient {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy="patient", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="patient", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
     private List<MedicalHistory> medicalHistoryList;
+
+    @OneToOne(mappedBy="patient", cascade=CascadeType.ALL)
+    private Medication medication;
+
+    @OneToOne(mappedBy="patient", cascade=CascadeType.ALL)
+    FamilyBackground familyBackground;
 
     public Patient() {
     }
@@ -97,6 +103,22 @@ public class Patient {
 
     public void setDoctorId(Long doctorId) {
         this.doctorId = doctorId;
+    }
+
+    public Medication getMedication() {
+        return medication;
+    }
+
+    public void setMedication(Medication medication) {
+        this.medication = medication;
+    }
+
+    public FamilyBackground getFamilyBackground() {
+        return familyBackground;
+    }
+
+    public void setFamilyBackground(FamilyBackground familyBackground) {
+        this.familyBackground = familyBackground;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.ironhack.finalprojectpatientservice.controller;
 
+import com.ironhack.finalprojectpatientservice.exception.NotFoundPatientException;
 import com.ironhack.finalprojectpatientservice.model.dto.FamilyBackgroundDTO;
 import com.ironhack.finalprojectpatientservice.service.FamilyBackgroundSevice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class FamilyBackgroundController {
 
     @GetMapping("/family_background/get_by_id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public FamilyBackgroundDTO getFamilyBackgroundById(@PathVariable("id") Long patientId) throws Exception {
+    public FamilyBackgroundDTO getFamilyBackgroundById(@PathVariable("id") Long patientId) throws NotFoundPatientException {
         return familyBackgroundSevice.getFamilyBackgroundById(patientId);
     }
 }
