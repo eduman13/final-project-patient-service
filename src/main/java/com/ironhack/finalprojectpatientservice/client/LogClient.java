@@ -4,7 +4,7 @@ import com.ironhack.finalprojectpatientservice.model.logging.Log;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name="logging-service")
+@FeignClient(name="logging-service", url="https://final-project-logging-service.herokuapp.com/")
 public interface LogClient {
 
     @PostMapping("/logging/post_log")
